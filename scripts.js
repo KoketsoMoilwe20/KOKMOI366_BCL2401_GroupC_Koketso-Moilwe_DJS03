@@ -1,9 +1,13 @@
 import { books, authors, genres, BOOKS_PER_PAGE } from './data.js'
 
 let page = 1;
-let matches = books
+let matches = books;
 
-const getDOM = (selector) => document.querySelector(selector);
+const getDOM = (selector) => document.querySelector(selector);//getting DOM elements
+
+const bookPreviews = (books, container) => {
+    
+}
 
 const starting = document.createDocumentFragment()
 
