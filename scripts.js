@@ -5,14 +5,12 @@ let matches = books;
 
 const getDOM = (selector) => document.querySelector(selector);//getting DOM elements
 
+//function to create and append book previews
 const bookPreviews = (books, container) => {
-    
-} //function to create and append book previews
+    const starting = document.createDocumentFragment();
 
-const starting = document.createDocumentFragment()
-
-for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
-    const element = document.createElement('button')
+    books.forEach(({ author, id, image, title }) => {
+        const element = document.createElement('button')
     element.classList = 'preview'
     element.setAttribute('data-preview', id)
 
@@ -25,28 +23,38 @@ for (const { author, id, image, title } of matches.slice(0, BOOKS_PER_PAGE)) {
         <div class="preview__info">
             <h3 class="preview__title">${title}</h3>
             <div class="preview__author">${authors[author]}</div>
-        </div>
+        </div>const starting = document.createDocumentFragment()
     `
 
     starting.appendChild(element)
-}
+    });
+    container.appendChild(fragment);
+};
 
-document.querySelector('[data-list-items]').appendChild(starting)
 
-const genreHtml = document.createDocumentFragment()
-const firstGenreElement = document.createElement('option')
-firstGenreElement.value = 'any'
-firstGenreElement.innerText = 'All Genres'
-genreHtml.appendChild(firstGenreElement)
 
-for (const [id, name] of Object.entries(genres)) {
-    const element = document.createElement('option')
-    element.value = id
-    element.innerText = name
-    genreHtml.appendChild(element)
-}
 
-document.querySelector('[data-search-genres]').appendChild(genreHtml)
+//document.querySelector('[data-list-items]').appendChild(starting)
+//Create a function to create and append options to select element
+const createOptions = (options, defaultOption, container) => {
+    const fragment = document.createDocumentFragment();
+    const firstOption = document.createElement("option");
+    firstOption.value = "any";
+    firstOption.innerText = defaultOption;
+    fragment.appendChild(firstOption);
+    Object.entries(options).forEach(([id, name]) => {
+      const element = document.createElement("option");
+      element.value = id;
+      element.innerText = name;
+      fragment.appendChild(element);
+    });
+    container.appendChild(fragment);
+  };
+
+
+
+//document.querySelector('[data-search-genres]').appendChild(genreHtml)
+
 
 const authorsHtml = document.createDocumentFragment()
 const firstAuthorElement = document.createElement('option')
