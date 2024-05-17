@@ -55,7 +55,19 @@ const createOptions = (options, defaultOption, container) => {
 
 //document.querySelector('[data-search-genres]').appendChild(genreHtml)
 
-
+//Applying theme:
+const applyTheme = (theme) => {
+    const isNight = theme === "night";
+    document.documentElement.style.setProperty(
+      "--color-dark",
+      isNight ? "255, 255, 255" : "10, 10, 20"
+    );
+    document.documentElement.style.setProperty(
+      "--color-light",
+      isNight ? "10, 10, 20" : "255, 255, 255"
+    );
+  };
+  
 const authorsHtml = document.createDocumentFragment()
 const firstAuthorElement = document.createElement('option')
 firstAuthorElement.value = 'any'
