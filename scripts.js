@@ -84,7 +84,30 @@ const applyTheme = (theme) => {
   };
 
 
-//
+//Event listener functions:
+const closeOverlay = (selector) => {
+    getElement(selector).open = false;
+  };
+  
+  const openOverlay = (selector, focusSelector = null) => {
+    getElement(selector).open = true;
+    if (focusSelector) getElement(focusSelector).focus();
+  };
+  
+  const applySearchFilters = (filters) => {
+    return books.filter((book) => {
+      const titleMatch =
+        filters.title.trim() === "" ||
+        book.title.toLowerCase().includes(filters.title.toLowerCase());
+      const authorMatch =
+        filters.author === "any" || book.author === filters.author;
+      const genreMatch =
+        filters.genre === "any" || book.genres.includes(filters.genre);
+      return titleMatch && authorMatch && genreMatch;
+    });
+  };
+
+  
 
 const authorsHtml = document.createDocumentFragment()
 const firstAuthorElement = document.createElement('option')
