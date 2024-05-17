@@ -67,7 +67,25 @@ const applyTheme = (theme) => {
       isNight ? "10, 10, 20" : "255, 255, 255"
     );
   };
-  
+
+  //Create function to update "Show more" button inner text
+  const updateShowMoreButton = () => {
+    const remainingBooks = matches.length - page * BOOKS_PER_PAGE;
+    const button = getElement("[data-list-button]");
+    button.innerText = `Show more ${remainingBooks}`;
+    
+    button.disabled = remainingBooks <= 0;
+    button.innerHTML = `
+      <span>Show more</span>
+      <span class="list__remaining">(${
+        remainingBooks > 0 ? remainingBooks : 0
+      })</span>
+    `;
+  };
+
+
+//
+
 const authorsHtml = document.createDocumentFragment()
 const firstAuthorElement = document.createElement('option')
 firstAuthorElement.value = 'any'
